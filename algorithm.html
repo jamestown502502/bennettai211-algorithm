@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BENNETTAI211 — The Rules (Public Algorithm)</title>
+<style>
+  :root{
+    --accent:#0f766e; --accent-dark:#0b5d56; --bg:#f2faf9; --card:#ffffff;
+    --ink:#12302c; --muted:#5c7873; --border:#cfe7e3;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:linear-gradient(180deg,#e3f4f1,var(--bg)); color:var(--ink); padding:24px 16px 60px;
+  }
+  .wrap{max-width:720px;margin:0 auto;}
+  header h1{font-size:1.5rem;margin:0 0 4px;color:var(--accent-dark);}
+  header p{color:var(--muted);margin:0 0 20px;font-size:.95rem;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:16px;}
+  h2{font-size:1.05rem;color:var(--accent-dark);margin:0 0 10px;}
+  table{width:100%;border-collapse:collapse;font-size:.85rem;}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  th{background:#eef8f6;font-size:.78rem;text-transform:uppercase;letter-spacing:.02em;color:var(--muted);}
+  .note{background:#eef8f6;border-left:3px solid var(--accent);border-radius:8px;padding:10px 14px;font-size:.82rem;color:var(--muted);margin-top:10px;}
+  .notdo{background:#fff4e8;border:1px solid #f3d9b8;border-radius:12px;padding:14px 16px;font-size:.82rem;color:#7a5a2e;}
+  .notdo strong{display:block;margin-bottom:4px;color:#8a4a10;}
+  a{color:var(--accent-dark);}
+  footer{text-align:center;color:var(--muted);font-size:.75rem;margin-top:24px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>BENNETTAI211 — The Rules</h1>
+    <p>How agent briefings are generated, what the platform is — and what it is not. No hidden weights, no hidden claims.</p>
+  </header>
+
+  <div class="card">
+    <h2>1. Agent generation rules (public)</h2>
+    <table>
+      <tr><th>Agent</th><th>Output</th><th>Basis (sourced)</th></tr>
+      <tr><td>Exposure Tracker</td><td>Estimated exposure drivers for the preset</td><td>Bottled water ~240K particles/L (PNAS 2024); intake 39–52K ingested / 74–121K inhaled/yr (Cox 2019); 0.1–5 g/wk range (Senathirajah 2022)</td></tr>
+      <tr><td>Detox Coach</td><td>Evidence-graded lifestyle guidance</td><td>Lifestyle guidance only — NO removal/health-outcome claims; graded by evidence strength</td></tr>
+      <tr><td>Health Correlation</td><td>Honest evidence state</td><td>WHO 2022; associative-not-causal labeling; 2026 methodological critiques disclosed</td></tr>
+      <tr><td>Research Integration</td><td>Latest credible findings</td><td>Detection studies with citations + caveats (Leslie 2022; UNM 2024; Campen 2025; Marfella 2024)</td></tr>
+      <tr><td>Community Engagement</td><td>Conversation starters</td><td>Engagement only — no advice, no claims</td></tr>
+    </table>
+    <div class="note">Awareness score = preset baseline (38–55) ± bottled-water habit (+15 often / −8 rarely), clamped 10–95. It is a model-estimated awareness range from published intake studies — NOT a personal measurement.</div>
+  </div>
+
+  <div class="card">
+    <h2>2. Sourced context used in briefings</h2>
+    <table>
+      <tr><th>Fact</th><th>Value</th><th>Source · Date</th></tr>
+      <tr><td>Microplastics in human blood</td><td>77% of samples (22 donors, mean 1.6 µg/ml)</td><td>Leslie et al., Env. Int. 2022</td></tr>
+      <tr><td>Microplastics in placentas</td><td>62/62 samples (6.5–790 µg/g)</td><td>UNM, Tox. Sci. 2024</td></tr>
+      <tr><td>Brain accumulation</td><td>7–30× liver/kidney; rising 2016→2024 (P=0.01)</td><td>Campen et al., Nat. Med. 2025</td></tr>
+      <tr><td>Carotid plaque association</td><td>Polyethylene in 58.4% of plaques; HR 4.53 (observational; critics note no blank controls)</td><td>Marfella et al., NEJM 2024</td></tr>
+      <tr><td>Bottled water</td><td>~240,000 particles/L, ~90% nanoplastics</td><td>Qian et al., PNAS 2024</td></tr>
+      <tr><td>Daily intake estimates</td><td>39–52K ingested / 74–121K inhaled particles/yr; 0.1–5 g/wk range</td><td>Cox 2019; Senathirajah 2022</td></tr>
+      <tr><td>WHO assessment</td><td>Little evidence of adverse effects at current levels; mitigate exposure</td><td>WHO 2022</td></tr>
+      <tr><td>FDA current position</td><td>Evidence does not demonstrate risk from MNPs in foods</td><td>FDA, Jul 2024</td></tr>
+      <tr><td>Consumer concern</td><td>90% concerned (Ipsos, May 2025); awareness +32% since 2023</td><td>Ipsos/Grove 2025; Ocean Conservancy 2026</td></tr>
+      <tr><td>DTC microplastic tests</td><td>Exist (~$150 blood tests) but "a number, few answers"</td><td>CNN/WSJ, Feb 2026</td></tr>
+      <tr><td>No consumer wearable</td><td>Measures personal microplastic exposure (verified gap)</td><td>Research scan 2026-09</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>3. Regulatory reality (why the platform is positioned as general wellness)</h2>
+    <table>
+      <tr><th>Item</th><th>State</th></tr>
+      <tr><td>FDA General Wellness policy</td><td>Low-risk wellness devices/apps with non-disease claims = no premarket review (compliance path)</td></tr>
+      <tr><td>FTC Health Products Guidance (Dec 2024)</td><td>Health/detox claims need competent &amp; reliable scientific evidence; "detox" attracts scrutiny</td></tr>
+      <tr><td>FTC enforcement precedent</td><td>Teami LLC (2020): $15.2M judgment over unsubstantiated detox claims</td></tr>
+      <tr><td>23andMe (Mar 2025)</td><td>Chapter 11 — cautionary signal for DTC testing models</td></tr>
+      <tr><td>Positioning consequence</td><td>BENNETTAI211 publishes NO removal/detox outcome claims, NO diagnostic claims, NO device. Awareness + education + research-grounded guidance only.</td></tr>
+    </table>
+    <div class="note">This positioning is deliberate and enforced: "detox" is the most enforcement-prone claim in consumer health. The product that survives is the one that never makes it.</div>
+  </div>
+
+  <div class="notdo">
+    <strong>What this does NOT do</strong>
+    Not a medical device. Not a microplastic test or biomonitoring service. Not a detox, removal, or treatment product. No health-outcome claims of any kind. Does not measure personal exposure. The science is contested (WHO 2022; 2026 critiques of headline studies) and the platform says so on every briefing.
+  </div>
+
+  <footer>
+    <a href="index.html">← Back to the simulator</a> · A product by Bennett AI Solutions Inc. · <a href="mailto:jb@bennettaisolutions.tech">jb@bennettaisolutions.tech</a>
+  </footer>
+</div>
+</body>
+</html>

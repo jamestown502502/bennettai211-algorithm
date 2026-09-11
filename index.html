@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BENNETTAI211 — Exposure Awareness Simulator</title>
+<title>BENNETTAI211 — Microplastics Learning Navigator</title>
 <style>
   :root{
     --accent:#0f766e; --accent-dark:#0b5d56; --bg:#f2faf9; --card:#ffffff;
@@ -19,31 +19,28 @@
   header h1{font-size:1.5rem;margin:0 0 4px;color:var(--accent-dark);}
   header p{color:var(--muted);margin:0;font-size:.95rem;}
   .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 2px 10px rgba(15,118,110,.06);}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .field{margin-bottom:12px;}
   label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.02em;}
   select,input[type=text]{
     width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;
     font-size:.95rem;background:#fbfefd;color:var(--ink);
   }
   select:focus,input:focus{outline:none;border-color:var(--accent);}
-  .field{margin-bottom:12px;}
   .result-hero{
     background:linear-gradient(135deg,var(--accent),#3bb5a8);color:#fff;border-radius:16px;
     padding:22px;text-align:center;margin-bottom:16px;transition:transform .15s ease;
   }
   .result-hero.pulse{transform:scale(1.015);}
-  .result-hero .big{font-size:1.6rem;font-weight:800;line-height:1.1;}
-  .result-hero .label{font-size:.78rem;opacity:.92;text-transform:uppercase;letter-spacing:.04em;margin-top:6px;}
-  .reason{font-size:.82rem;margin-top:10px;opacity:.95;background:rgba(255,255,255,.15);border-radius:10px;padding:8px 12px;text-align:left;}
-  .est{font-size:.72rem;margin-top:8px;background:rgba(255,255,255,.2);border-radius:8px;padding:5px 10px;display:inline-block;}
-  .agent{border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:#fbfefd;}
-  .agent .t{font-weight:700;font-size:.88rem;color:var(--accent-dark);}
-  .agent .d{font-size:.8rem;color:var(--muted);margin-top:3px;}
-  .agent .why{font-size:.78rem;margin-top:6px;background:#eef8f6;border-radius:8px;padding:6px 10px;}
-  .agent .src{font-size:.7rem;color:var(--muted);margin-top:5px;}
-  .gauge{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px;}
-  .bar{width:180px;height:8px;background:rgba(255,255,255,.3);border-radius:6px;overflow:hidden;}
-  .bar-fill{height:100%;background:#fff;border-radius:6px;}
+  .result-hero .big{font-size:1.3rem;font-weight:800;line-height:1.25;}
+  .result-hero .label{font-size:.76rem;opacity:.92;text-transform:uppercase;letter-spacing:.04em;margin-top:6px;}
+  .briefing{border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:#fbfefd;}
+  .briefing .t{font-weight:700;font-size:.88rem;color:var(--accent-dark);}
+  .briefing .d{font-size:.8rem;color:var(--muted);margin-top:3px;}
+  .briefing .why{font-size:.76rem;margin-top:6px;background:#eef8f6;border-radius:8px;padding:6px 10px;}
+  .briefing .src{font-size:.7rem;color:var(--muted);margin-top:5px;}
+  .topics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+  .topic{border:1px solid var(--border);border-radius:10px;padding:9px 10px;font-size:.8rem;background:#fbfefd;cursor:pointer;}
+  .topic:hover{border-color:var(--accent);}
   details{border:1px solid var(--border);border-radius:12px;padding:10px 14px;background:#fbfefd;}
   summary{cursor:pointer;font-weight:600;font-size:.88rem;color:var(--accent-dark);}
   table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.8rem;}
@@ -58,128 +55,185 @@
 <div class="wrap">
   <header>
     <h1>BENNETTAI211</h1>
-    <p>A general-wellness awareness platform for microplastic exposure — five AI agents, sourced science, zero health claims.</p>
+    <p>A plain-language, source-linked microplastics education tool. Awareness, not alarm — and never a health assessment.</p>
   </header>
 
   <div class="card">
-    <div class="grid">
-      <div class="field">
-        <label>Lifestyle Preset</label>
-        <select id="preset">
-          <option value="commuter" selected>Urban Commuter</option>
-          <option value="family">Coastal Family</option>
-          <option value="desk">Desk-Worker / Homebody</option>
-          <option value="custom">Custom</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Bottled Water Habit</label>
-        <select id="water">
-          <option value="often">Mostly bottled</option>
-          <option value="sometimes" selected>Mixed</option>
-          <option value="rarely">Mostly tap / filtered</option>
-        </select>
-      </div>
+    <div class="field">
+      <label>What do you want to understand?</label>
+      <select id="topic">
+        <option value="science" selected>What scientists know about microplastics</option>
+        <option value="unknowns">What scientists do NOT yet know about health effects</option>
+        <option value="sources">Water, food, air, and household-contact research</option>
+        <option value="headlines">How to assess a microplastics headline</option>
+        <option value="choices">Everyday choices and the strength of evidence</option>
+        <option value="questions">Questions to discuss with a health professional</option>
+        <option value="local">How to find local drinking-water information</option>
+      </select>
     </div>
+    <p class="muted">This is a learning navigator. It returns source-linked briefings — it does not estimate your exposure, assess your risk, or give medical advice.</p>
   </div>
 
   <div class="result-hero" id="resultHero">
-    <div class="big" id="score">Moderate estimated exposure</div>
-    <div class="label">Awareness score — model-estimated, not measured</div>
-    <div class="reason" id="reasonLine">Urban commuter · mixed bottled-water habit · airborne + dietary intake estimates within typical ranges (Cox 2019; Senathirajah 2022)</div>
-    <div class="gauge">
-      <span style="font-size:.75rem;">LOW</span>
-      <div class="bar"><div class="bar-fill" id="gaugeFill" style="width:55%"></div></div>
-      <span style="font-size:.75rem;">HIGH</span>
-    </div>
+    <div class="big" id="headline">What scientists know about microplastics</div>
+    <div class="label">Source-linked briefing · updated with dates and limitations</div>
+    <div class="briefing" id="claim" style="background:rgba(255,255,255,.14);text-align:left;"></div>
   </div>
 
   <div class="card">
-    <strong style="font-size:.9rem;">Agent briefings</strong>
-    <div id="agentList" style="margin-top:10px;"></div>
+    <strong style="font-size:.9rem;">The briefing</strong>
+    <div id="briefingList" style="margin-top:10px;"></div>
+    <p class="muted" style="margin-top:8px;">Every briefing separates: the claim · what the study actually examined · how strong or limited the evidence is · what cannot be concluded · date and source · a practical, non-medical next step.</p>
+  </div>
+
+  <div class="card">
+    <strong style="font-size:.9rem;">Explore another topic</strong>
+    <div class="topics" id="topicGrid"></div>
   </div>
 
   <div class="card">
     <details>
-      <summary>See the rules — how agent briefings are generated</summary>
+      <summary>See the rules — how briefings are produced (editorial functions)</summary>
       <table>
-        <tr><th>Agent</th><th>Output</th><th>Basis (sourced)</th></tr>
-        <tr><td>Exposure Tracker</td><td>Estimated exposure drivers for the preset</td><td>Bottled water ~240K particles/L (PNAS 2024); intake 39–52K ingested / 74–121K inhaled particles/yr (Cox 2019); 0.1–5 g/wk range (Senathirajah 2022)</td></tr>
-        <tr><td>Detox Coach</td><td>Evidence-graded lifestyle guidance</td><td>Lifestyle guidance only — NO removal/health-outcome claims; graded by evidence strength</td></tr>
-        <tr><td>Health Correlation</td><td>What research says, honestly</td><td>WHO 2022: little evidence of harm at current levels; studies are associative not causal; 2026 methodological critiques disclosed</td></tr>
-        <tr><td>Research Integration</td><td>Latest credible findings</td><td>Detection studies (blood 77%, placentas 62/62, brain 7–30x) labeled with citations + caveats</td></tr>
-        <tr><td>Community Engagement</td><td>Conversation starters</td><td>General awareness prompts — no medical advice</td></tr>
+        <tr><th>Function</th><th>Role</th></tr>
+        <tr><td>Research monitor</td><td>Identifies and dates new studies</td></tr>
+        <tr><td>Evidence reviewer</td><td>Labels study type, limits, and strength (correlation vs. mechanism vs. causal evidence kept separate)</td></tr>
+        <tr><td>Plain-language editor</td><td>Translates research without sensationalism</td></tr>
+        <tr><td>Everyday-context guide</td><td>Offers non-medical, evidence-graded actions</td></tr>
+        <tr><td>Community safety moderator</td><td>Enforces no-diagnosis and no-detox-claim rules</td></tr>
       </table>
-      <p class="muted" style="margin-top:8px;">Public rules, no hidden weights. Every briefing carries sources + dates. This is a general-wellness awareness tool — no device, no test kit, no removal product, no health claims.</p>
+      <p class="muted" style="margin-top:8px;">These are editorial roles (called "agents" only in the technical methodology). Sources are ranked: public-health authorities, systematic reviews, peer-reviewed research, then clearly labeled emerging research. Material claims receive independent review before publication; corrections show what changed and why. The platform does not sell, recommend, or accept affiliate payments for detox or testing products.</p>
     </details>
   </div>
 
   <div class="notdo">
     <strong>What this does NOT do</strong>
-    This is NOT a medical device, NOT a microplastic test, NOT a detox or removal product, and it makes NO health or treatment claims. It does not measure your personal exposure — every figure is a model-estimated awareness range from published studies. The science itself is contested: WHO (2022) found little evidence of harm at current levels, and 2026 critiques challenged the reliability of several headline detection studies. Nothing here is medical advice — consult a clinician for health questions.
+    It does not measure personal exposure, estimate health risk, diagnose conditions, recommend treatment, or claim to remove microplastics from the body. No risk scores, no individualized exposure estimates, no health data collected. "Awareness, not alarm" is the product — and the science's contested state (WHO 2022; 2026 critiques of headline studies) is disclosed in every relevant briefing, never hidden.
   </div>
 
   <footer>
-    General wellness awareness only — not medical advice, not a diagnostic, not a detox product.<br>
+    Education only — not medical advice, not a diagnostic, not a detox product, not a personal exposure estimate.<br>
     A product by Bennett AI Solutions Inc. · <a class="footer-link" href="algorithm.html">Inspect the algorithm →</a> · <a class="footer-link" href="mailto:jb@bennettaisolutions.tech">jb@bennettaisolutions.tech</a>
   </footer>
 </div>
 
 <script>
-const PRESETS = {
-  commuter: { label: "Urban Commuter", score: 55, reasons: ["airborne intake typical for urban transit exposure", "mixed bottled-water habit within typical dietary intake"] },
-  family:   { label: "Coastal Family", score: 48, reasons: ["seafood-inclusive diet within typical intake ranges", "filtered-water habit lowers bottled-water exposure"] },
-  desk:     { label: "Desk-Worker / Homebody", score: 38, reasons: ["low transit exposure", "home-filtered water habit"] },
-  custom:   { label: "Custom", score: 45, reasons: ["typical mixed intake", "habit-based adjustment applied"] }
+const BRIEFINGS = {
+  science: {
+    title: "What scientists know about microplastics",
+    claim: "The claim: microplastics are everywhere — found in human blood (77% of samples in one 2022 study), placentas (62/62 in one 2024 study), and bottled water (~240,000 particles/L, mostly nanoplastics, 2024).",
+    sections: [
+      { t: "What the studies actually examined", d: "Detection studies: they found plastic particles in samples — blood (Leslie et al., 2022), placentas (UNM, 2024), brains (Campen et al., Nature Medicine, 2025), bottled water (Qian et al., PNAS, 2024). Detection ≠ demonstrated harm." },
+      { t: "How strong or limited the evidence is", d: "Detection is well established. What the particles DO in the body is an open question. WHO (2022): 'the limited data provide little evidence that MNPs have adverse effects in humans' — while recommending exposure mitigation." },
+      { t: "What cannot be concluded", d: "That these particles cause specific illnesses. Brain/plaque studies show associations (correlation), not causation — and 2026 peer critiques questioned the reliability of several headline detection methods." },
+      { t: "Practical, non-medical next step", d: "If you want to reduce plastic contact, the stronger-evidence everyday choices are: prefer filtered/tap water over bottled where practical, ventilate indoor spaces, and reduce single-use plastic food contact. Consult local water-quality information and official sources." }
+    ],
+    sources: "Leslie 2022 · UNM 2024 · Campen/Nat Med 2025 · Qian/PNAS 2024 · WHO 2022 · 2026 methodological critiques"
+  },
+  unknowns: {
+    title: "What scientists do NOT yet know about health effects",
+    claim: "The honest state of the science: whether microplastics cause harm in humans is not established.",
+    sections: [
+      { t: "What is known", d: "Particles are present in human tissues (blood, lungs, placentas, brains, testes). Exposure routes are documented: ingestion and inhalation." },
+      { t: "What is not known", d: "Dose-response relationships, whether accumulation causes illness, which particle types matter most, and reliable measurement methods (EPA: no validated single analytical method exists yet)." },
+      { t: "Why it matters for you", d: "Headlines overstate certainty. A credible source distinguishes detection, correlation, mechanism studies, and human causal evidence — and says when evidence is missing." },
+      { t: "Non-medical next step", d: "Follow the evidence as it develops (with dates), and treat any product claiming to 'detox' or 'remove' microplastics from your body as unsupported — regulators treat those claims seriously (FTC enforcement)." }
+    ],
+    sources: "WHO 2022 · EPA Water Research (Mar 2026) · FDA microplastics page (Jul 2024) · FTC guidance (Dec 2024)"
+  },
+  sources: {
+    title: "Water, food, air, and household-contact research",
+    claim: "Exposure routes: bottled water ~240,000 particles/L (~90% nanoplastics, 2024); estimated intake 39,000–52,000 particles/yr ingested and 74,000–121,000/yr inhaled (2019 estimate).",
+    sections: [
+      { t: "Water", d: "Bottled water studies report high particle counts; EU drinking-water studies report lower levels (0.0000–0.6 particles/L). Methods differ — numbers are not directly comparable. Local tap-water quality info is available from your utility." },
+      { t: "Food", d: "Microplastics found in ~90% of sampled proteins including plant-based alternatives (2024); seafood and salt studies exist. Dietary intake estimates are modeled, not measured per person." },
+      { t: "Air & household", d: "Inhalation is a real route (particles found in lung tissue); indoor dust and synthetic textiles are contact sources. Consumer Reports (2025) found no validated affordable at-home test." },
+      { t: "Non-medical next step", d: "Practical choices with the stronger evidence: filtered/tap water where practical, ventilation, less single-use plastic food contact. No test kit is validated for personal measurement yet." }
+    ],
+    sources: "Qian/PNAS 2024 · EU JRC 2024 · Ocean Conservancy 2024 · Cox 2019 · Consumer Reports 2025"
+  },
+  headlines: {
+    title: "How to assess a microplastics headline",
+    claim: "Most headlines compress a study into a scare line. The skill is checking the study, not the headline.",
+    sections: [
+      { t: "Ask five questions", d: "1) What was actually measured? 2) Detection or harm? 3) Sample size and controls? 4) Peer-reviewed? 5) Does the article cite the original study? A 2026 review challenged several famous findings on method grounds — skepticism is warranted in both directions." },
+      { t: "Signal words", d: "'May', 'could', 'associated with' = correlation. 'Causes', 'proven', 'removes' = strong claims requiring strong evidence. Products promising 'detox' or 'removal' from the body are unsupported." },
+      { t: "What to do", d: "Check the date (science moves), check the source ranking (public-health authorities > systematic reviews > single studies), and note whether caveats are included or buried." },
+      { t: "Non-medical next step", d: "Bookmark official sources (WHO, EPA, FDA) rather than aggregator headlines." }
+    ],
+    sources: "Guardian methodological review (Jan 2026) · WHO 2022 · EPA · FDA"
+  },
+  choices: {
+    title: "Everyday choices and the strength of evidence",
+    claim: "Evidence-graded, non-medical guidance — no health claims.",
+    sections: [
+      { t: "Stronger evidence", d: "Prefer filtered/tap water over bottled where practical (bottled water particle counts are the most replicated finding). Ventilate indoor spaces." },
+      { t: "Emerging evidence", d: "Reduce single-use plastic food contact (heat + plastic increases particle release — mechanism evidence). Avoid microwaving plastics." },
+      { t: "Not supported", d: "Detox teas, 'plastic-cleanse' products, unvalidated home tests. FTC enforcement history (Teami, 2020: $15.2M judgment) shows the risk of these claims." },
+      { t: "Non-medical next step", d: "Evidence on plastic contact differs by setting — consult local water-quality information and official sources for your situation." }
+    ],
+    sources: "Qian/PNAS 2024 · WHO 2022 · FTC 2020/2024 · general exposure literature"
+  },
+  questions: {
+    title: "Questions to discuss with a health professional",
+    claim: "BENNETTAI211 is not medical advice. Here is what to ask YOUR clinician if microplastics concern you.",
+    sections: [
+      { t: "Why this section exists", d: "We do not assess your health. If you have specific health questions, a clinician is the right source — here are conversation starters." },
+      { t: "Example questions", d: "'Given my exposure patterns, is there anything specific to monitor?' · 'Are there evidence-based ways to reduce plastic contact that fit my situation?' · 'What symptoms, if any, are linked to environmental exposures I should know about?'" },
+      { t: "What to expect", d: "Evidence on microplastics and human health is still emerging — a responsible clinician may say 'no established screening exists.' That is accurate, not dismissive." },
+      { t: "Non-medical next step", d: "Bring this briefing to your appointment; it summarizes the evidence state so you and your clinician start from the same facts." }
+    ],
+    sources: "WHO 2022 · FDA 2024 · general health-communication guidance"
+  },
+  local: {
+    title: "How to find local drinking-water information",
+    claim: "Your water utility, not a headline, is the authoritative source for your tap water.",
+    sections: [
+      { t: "Where to look", d: "US: your utility's annual Consumer Confidence Report (CCR) — required by EPA rules. EPA also provides drinking-water contacts by state. EU: your water supplier's quality reports." },
+      { t: "What it covers", d: "Contaminant levels and compliance. Microplastics are not yet a standard monitored parameter (no validated method/MCL), so absence from the report is expected, not evidence of absence." },
+      { t: "Filters", d: "If you choose a filter for particulates: NSF/ANSI 401 covers microplastics-reduction claims for drinking-water filters; no standard exists for nanoplastics (<1 µm) yet." },
+      { t: "Non-medical next step", d: "Search '[your city] water quality report' or contact your utility directly." }
+    ],
+    sources: "EPA CCR requirements · NSF/ANSI 401 · EU Drinking Water Directive"
+  }
 };
+const ORDER = ["science", "unknowns", "sources", "headlines", "choices", "questions", "local"];
 
-function brief(){
-  const preset = PRESETS[document.getElementById('preset').value];
-  const water = document.getElementById('water').value;
+function brief(topic){
+  const b = BRIEFINGS[topic] || BRIEFINGS.science;
+  document.getElementById('headline').textContent = b.title;
+  document.getElementById('claim').innerHTML = '<div class="t">The claim</div><div class="d">' + b.claim + '</div>';
 
-  let score = preset.score;
-  if(water === 'often') score += 15;
-  if(water === 'rarely') score -= 8;
-  score = Math.max(10, Math.min(95, score));
-
-  const scoreLabel = score < 40 ? "Lower estimated exposure" : score < 65 ? "Moderate estimated exposure" : "Higher estimated exposure";
-  document.getElementById('score').textContent = scoreLabel;
-  document.getElementById('gaugeFill').style.width = score + '%';
-  document.getElementById('reasonLine').textContent =
-    preset.label + ' · ' + waterLabel(water) + ' · ' + preset.reasons.join('; ');
-
-  const list = document.getElementById('agentList');
+  const list = document.getElementById('briefingList');
   list.innerHTML = '';
-
-  const agents = [
-    { t: "Exposure Tracker Agent", d: "Estimated drivers: dietary intake 39,000–52,000 particles/yr + 74,000–121,000 inhaled/yr (Cox et al. 2019); bottled water alone ~240,000 particles/L (~90% nanoplastics) (Qian et al., PNAS 2024). " + (water === 'often' ? "Your bottled-water habit raises the upper range." : water === 'rarely' ? "Your filtered/tap habit lowers the bottled-water share." : "Mixed water habit keeps you in the typical range."), why: "Model-estimated from published intake studies — not a personal measurement", src: "Cox 2019 · Qian/PNAS 2024" },
-    { t: "Detox Coach Agent", d: "Evidence-graded lifestyle guidance (strength-graded, no health claims): (1) strong evidence — drink filtered/tap water over bottled where practical; (2) moderate — ventilate indoor spaces; (3) emerging — reduce single-use plastic food contact. Guidance only; efficacy for any health outcome is not claimed.", why: "Graded by evidence strength; explicitly not a removal product or treatment claim", src: "WHO 2022 · general exposure literature" },
-    { t: "Health Correlation Agent", d: "Honest state of the evidence: WHO (2022) found limited data showing little evidence of adverse effects in humans at current levels while recommending exposure mitigation. Detection studies (microplastics in 77% of blood samples — Leslie 2022; 62/62 placentas — UNM 2024; brains 7–30× liver/kidney — Campen, Nat Med 2025) are associative, not causal. 2026 peer critiques questioned the reliability of several headline studies.", why: "Correlation ≠ causation; methodological controversy disclosed, not hidden", src: "WHO 2022 · Leslie 2022 · Campen 2025 · 2026 critiques" },
-    { t: "Research Integration Agent", d: "Latest credible findings with caveats: carotid-artery plaque study found polyethylene in 58.4% of plaques with HR 4.53 for cardiovascular events (Marfella, NEJM 2024 — observational, no blank-sample controls per critics). Awareness context: 90% of Americans are concerned about microplastic health impacts (Ipsos/Grove, May 2025); awareness up 32% since 2023 (Ocean Conservancy, 2026).", why: "Cited with caveats; observational designs disclosed", src: "Marfella/NEJM 2024 · Ipsos 2025 · OC 2026" },
-    { t: "Community Engagement Agent", d: "Conversation starters for the awareness community: 'What are your practical swaps for cutting single-use plastics?' 'Share a filtered-water setup you trust.' Moderation rules: no medical claims, no product pitches, no fear-mongering — the science is emerging and honesty is the brand.", why: "Community layer — engagement only, no advice", src: "BENNETTAI211 community charter" }
-  ];
-
-  agents.forEach(function(a){
+  b.sections.forEach(function(s){
     const div = document.createElement('div');
-    div.className = 'agent';
-    div.innerHTML = '<div class="t">' + a.t + '</div><div class="d">' + a.d + '</div><div class="why">Why: ' + a.why + '</div><div class="src">Sources: ' + a.src + '</div>';
+    div.className = 'briefing';
+    div.innerHTML = '<div class="t">' + s.t + '</div><div class="d">' + s.d + '</div>';
     list.appendChild(div);
   });
+  const src = document.createElement('div');
+  src.className = 'src';
+  src.textContent = 'Sources: ' + b.sources;
+  list.appendChild(src);
 
   const hero = document.getElementById('resultHero');
   hero.classList.add('pulse');
   setTimeout(function(){ hero.classList.remove('pulse'); }, 200);
 }
 
-function waterLabel(w){
-  return { often: 'mostly bottled water', sometimes: 'mixed water habit', rarely: 'mostly tap / filtered water' }[w];
-}
-
-['preset','water'].forEach(function(id){
-  document.getElementById(id).addEventListener('change', brief);
+const grid = document.getElementById('topicGrid');
+ORDER.forEach(function(t){
+  const div = document.createElement('div');
+  div.className = 'topic';
+  div.textContent = BRIEFINGS[t].title;
+  div.onclick = function(){ document.getElementById('topic').value = t; brief(t); };
+  grid.appendChild(div);
 });
 
-brief();
+document.getElementById('topic').addEventListener('change', function(){ brief(this.value); });
+
+brief('science');
 </script>
 </body>
 </html>
